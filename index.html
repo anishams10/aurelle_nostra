@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amira</title>
+
+    <!--Font Cormorant+Garamond-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+
+    <!--Material icon-->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="font-['karla'] bg-[#FBF6EF] text-gray-700">
+
+    <!--Navbar-->
+    <nav class="sticky top-0 z-40">
+        <div id="navHead" class=" bg-zinc-800 text-white py-2">
+            <p class="uppercase text-center text-xs text-center tracking-wider px-16 sm:mx-28">Free shipping on
+                orders above ₹1,999 · Easy 7-day returns</p>
+            <p id="navHeadClose" class="uppercase text-md absolute top-1 right-8 lg:right-28 cursor-pointer">&times;
+            </p>
+        </div>
+        <div class="bg-white/90 flex items-center justify-between px-8 py-2 md:px-28 2xl:px-56 shadow-2xl">
+
+            <a class="font-['Cormorant'] font-bold italic tracking-widest text-xl lg:text-2xl uppercase">Amira</a>
+
+            <div class="font-light gap-8 flex items-center">
+                <div class="hidden md:flex md:gap-8 items-center">
+                    <a href="index.html" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Home</a>
+                    <a href="shop.html" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Shop</a>
+                    <a href="" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Contact</a>
+                </div>
+                <a href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search h-5 w-5" aria-hidden="true">
+                        <path d="m21 21-4.34-4.34"></path>
+                        <circle cx="11" cy="11" r="8"></circle>
+                    </svg>
+                </a>
+                <button class="relative btnCart cursor-pointer">
+                    <p
+                        class="cartCount absolute -right-2 -top-2 bg-orange-800 text-white text-xs p-[2px] px-2 rounded-3xl">
+                        0</p>
+                    <svg class="cart" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-shopping-bag h-5 w-5" aria-hidden="true"
+                        data-tsd-source="/src/components/CartDrawer.tsx:31:11">
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        <path d="M3.103 6.034h17.794"></path>
+                        <path
+                            d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z">
+                        </path>
+                    </svg>
+                </button>
+                <div id="hamMenu" class="flex items-center md:hidden">
+                    <span class="material-symbols-outlined text-red-950">menu</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!--sidenav-->
+        <div id="sideNav"
+            class="transition-all duration-1000 bg-zinc-800 items-center text-lg text-gray-300 fixed w-1/2 h-dvh top-0"
+            style="right: -70%;">
+            <p id="sideNavClose" class="uppercase text-md absolute top-10 right-8 cursor-pointer">X</p>
+            <div class="flex flex-col gap-8 m-8 p-8 py-16 top-40">
+                <a href="" class="cursor-pointer">Home</a>
+                <a href="" class="cursor-pointer">Shop</a>
+                <a href="" class="cursor-pointer">Contact</a>
+            </div>
+        </div>
+
+        <!--Cart-->
+        <div>
+            <!-- Cart overlay -->
+            <div
+                class="cartOverlay fixed inset-0 bg-black/40 z-40 opacity-0 pointer-events-none transition-opacity duration-300">
+            </div>
+
+            <!-- Cart drawer -->
+            <div
+                class="cartDrawer fixed top-0 right-0 h-screen w-full sm:w-[420px] bg-white z-50 translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+                <!-- Header -->
+                <div class="flex items-center justify-between p-5 border-b">
+                    <h2 class="text-xl font-semibold">
+                        Your Cart (<span class="cartCount">0</span>)
+                    </h2>
+
+                    <button class="closeCart text-3xl font-light" aria-label="Close cart">
+                        &times;
+                    </button>
+                </div>
+
+                <!-- Products -->
+                <div class="cartItems flex-1 overflow-y-auto p-5 flex flex-col gap-4">
+                </div>
+
+                <!-- Footer -->
+                <div class="border-t p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <p class="text-lg font-medium">Total</p>
+                        <p class="text-lg font-semibold">
+                            ₹<span class="cartTotal">0</span>
+                        </p>
+                    </div>
+
+                    <button class="w-full bg-zinc-900 text-white py-3 hover:bg-zinc-700 transition">
+                        Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </nav>
+    <!--Header-->
+    <header>
+        <!--Hero Section-->
+        <div class="relative h-[70vh] lg:h-[85vh] overflow-hidden">
+            <!--slide1-->
+            <div id="slide-1" class="absolute inset-0">
+                <img width="1600" height="912" class="h-full w-full object-cover hero-zoom1" src="Image/Hero/hero-1.jpg"
+                    alt="">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+                <div class="absolute top-1/2 -translate-y-1/2 text-white/98 content-start px-8 py-3 md:px-28 2xl:px-56">
+                    <p class="rise1 uppercase tracking-widest text-sm text-orange-400 mb-4">New Season . Gold Edit</p>
+                    <h1 class="rise1 font-['Cormorant'] text-6xl lg:text-8xl mb-4">Wear the light</h1>
+                    <p class="rise1 tracking-tight text-lg font-extralight mb-4">Hand-finished gold pieces that catch
+                        every glance.</p>
+                    <button
+                        class="rise1 uppercase text-sm px-8 py-4 bg-white text-black tracking-widest mx-auto mb-4">Shop
+                        the Edit</button>
+                </div>
+            </div>
+
+            <!--slide2-->
+            <div id="slide-2" class="absolute inset-0">
+                <img width="1600" height="912" class="h-full w-full object-cover hero-zoom2" src="Image/Hero/hero-2.jpg"
+                    alt="">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+                <div
+                    class="absolute top-1/2 -translate-y-1/2 text-white/98 content-start px-8 py-3 md:px-28 2xl:px-56 lg:w-3/5">
+                    <p class="rise2 uppercase tracking-widest text-sm text-orange-400 mb-4">Handbags & Silks</p>
+                    <h1 class="rise2 font-['Cormorant'] text-6xl lg:text-8xl mb-4">Carry your story</h1>
+                    <p class="rise2 tracking-tight text-lg font-extralight mb-4">Structured leather and soft silk, made
+                        to be lived in.</p>
+                    <button
+                        class="rise2 uppercase text-sm px-8 py-4 bg-white text-black tracking-widest mx-auto mb-4">Shop
+                        the Edit</button>
+                </div>
+            </div>
+
+            <!--slide3-->
+            <div id="slide-3" class="absolute inset-0">
+                <img width="1600" height="912" class="h-full w-full object-cover hero-zoom3" src="Image/Hero/hero-3.jpg"
+                    alt="">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+                <div
+                    class="absolute top-1/2 -translate-y-1/2 text-white/98 content-start px-8 py-3 md:px-28 2xl:px-56 lg:w-3/5">
+                    <p class="rise3 uppercase tracking-widest text-sm text-orange-400 mb-4">Summer Ritual</p>
+                    <h1 class="rise3 font-['Cormorant'] text-6xl lg:text-8xl mb-4">Golden hour, all day.</h1>
+                    <p class="rise3 tracking-tight text-lg font-extralight mb-4">Structured leather and soft silk, made
+                        to be lived in.</p>
+                    <button
+                        class="rise3 uppercase text-sm px-8 py-4 bg-white text-black tracking-widest mx-auto mb-4">Shop
+                        the Edit</button>
+                </div>
+            </div>
+
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white flex gap-4 items-center z-20">
+                <button id="prev" class="text-2xl font-extralight px-2 cursor-pointer">
+                    < </button>
+                        <button class="slideBar1"></button>
+                        <button class="slideBar2"></button>
+                        <button class="slideBar3"></button>
+                        <button id="next" class="text-2xl font-extralight px-2 cursor-pointer"> > </button>
+            </div>
+        </div>
+    </header>
+
+    <!--brands-->
+    <section class="bg-[#F0E7DA]">
+        <div class="overflow-hidden p-4">
+            <div class="flex w-max marquee">
+                <div class="flex shrink-0 gap-16 pr-16 font-['Cormorant'] italic text-2xl">
+                    <p>Ondine</p>
+                    <p>Maison Lune</p>
+                    <p>Aurélie</p>
+                    <p>Velora</p>
+                    <p>Stella & Co</p>
+                    <p>Nuvé</p>
+                </div>
+
+                <div class="flex shrink-0 gap-16 pr-16 font-['Cormorant'] italic text-2xl" aria-hidden="true">
+                    <p>Ondine</p>
+                    <p>Maison Lune</p>
+                    <p>Aurélie</p>
+                    <p>Velora</p>
+                    <p>Stella & Co</p>
+                    <p>Nuvé</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--category-->
+    <section class="p-4 py-12 text-center flex flex-col items-center">
+        <p class="uppercase text-xs text-orange-800 tracking-widest my-4">Shop by category</p>
+        <h1 class="font-['Cormorant'] text-5xl font-medium mb-6 p-6">Find your accessory</h1>
+        <div class="flex gap-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+            <p
+                class="py-2 px-4 ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 hover:-translate-y-0.5">
+                Jewelry</p>
+            <p
+                class="py-2 px-4 ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 hover:-translate-y-0.5">
+                Handbags</p>
+            <p
+                class="py-2 px-4 ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 hover:-translate-y-0.5">
+                Watches</p>
+            <p
+                class="py-2 px-4 ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 hover:-translate-y-0.5">
+                Sunglasses</p>
+            <p
+                class="py-2 px-4 ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 hover:-translate-y-0.5">
+                Scarves</p>
+            <p
+                class="py-2 px-4 ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 hover:-translate-y-0.5">
+                Hair Accessories</p>
+        </div>
+    </section>
+
+
+    <!--Most wanted-->
+    <section class="px-8 py-6 md:py-20 lg:py-20 md:px-28 2xl:px-56 mb-12 bg-[#F0E7DA]">
+        <p class="uppercase text-xs text-orange-800 tracking-widest my-4">Most Wanted</p>
+        <div class="flex justify-between items-center">
+            <h1 class="font-['Cormorant'] text-5xl font-medium mb-6">Loved by Everyone</h1>
+            <a class="uppercase text-xs tracking-widest my-4 hover:underline cursor-pointer">View all →</a>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 justify-between lg:grid-cols-4">
+
+            <!--image 1-->
+            <div class="flex flex-col gap-2 product-card" data-product-id="1">
+                <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                    <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                        src="Image/Most_wanted/product-gold-hoops.jpg" alt="">
+                    <button style="bottom: -20%;"
+                        class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                        to cart</button>
+                </div>
+                <div class="flex justify-between px-2">
+                    <h1 class="font-['Cormorant'] font-bold text-lg">Sol Gold Hoops</h1>
+                    <p>₹899</p>
+                </div>
+                <div class="text-xs font-light px-2">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                </div>
+            </div>
+
+            <!--image 2-->
+            <div class="flex flex-col gap-2 product-card" data-product-id="2">
+                <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                    <img class=" hover:transform hover:scale-105 hover:duration-500"
+                        src="Image/Most_wanted/product-burgundy-bag.jpg" alt="">
+                    <button style="bottom: -20%;"
+                        class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                        to cart</button>
+                </div>
+                <div class="flex justify-between px-2">
+                    <h1 class="font-['Cormorant'] font-bold text-lg">Margot Mini Bag</h1>
+                    <p>₹1099</p>
+                </div>
+                <div class="text-xs font-light px-2">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                </div>
+            </div>
+
+            <!--image 3-->
+            <div class="flex flex-col gap-2 product-card" data-product-id="3">
+                <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                    <img class=" hover:transform hover:scale-105 hover:duration-500"
+                        src="Image/Most_wanted/product-cat-eye.jpg" alt="">
+                    <button style="bottom: -20%;"
+                        class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                        to cart</button>
+                </div>
+                <div class="flex justify-between px-2">
+                    <h1 class="font-['Cormorant'] font-bold text-lg">Riviera Sunglasses</h1>
+                    <p>₹1599</p>
+                </div>
+                <div class="text-xs font-light px-2">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                </div>
+            </div>
+
+            <!--image 4-->
+            <div class="flex flex-col gap-2 product-card" data-product-id="4">
+                <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                    <img class=" hover:transform hover:scale-105 hover:duration-500"
+                        src="Image/Most_wanted/product-botanical-scarf.jpg" alt="">
+                    <button style="bottom: -20%;"
+                        class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                        to cart</button>
+                </div>
+                <div class="flex justify-between px-2">
+                    <h1 class="font-['Cormorant'] font-bold text-lg">Botanica Printed Scarf</h1>
+                    <p>₹699</p>
+                </div>
+                <div class="text-xs font-light px-2">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Collections-->
+    <section class="px-8 py-4 lg:py-12 md:px-28 2xl:px-56 text-center flex flex-col items-center">
+        <p class="uppercase text-xs text-orange-800 tracking-widest">Curated stories</p>
+        <h1 class="font-['Cormorant'] text-5xl font-medium mb-6 p-6">The Collections</h1>
+
+        <div class="grid lg:grid-cols-[1fr_2fr] gap-6 overflow-hidden">
+            <div class="relative h-[400px] lg:h-[600px] overflow-hidden">
+                <a href="" class="group overflow-hidden">
+                    <img class="h-full w-fit object-none object-top transition duration-700 group-hover:scale-105"
+                        src="Image/Collections/1.jpg" alt="">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute left-8 bottom-8 flex flex-col gap-2 text-left">
+                        <p class="uppercase tracking-widest text-xs text-orange-300">Sun-soaked shades & silks</p>
+                        <h1 class="font-['Cormorant'] text-4xl text-white font-medium">Summer Rivera</h1>
+                        <a href="" class="uppercase text-xs underline text-white">Shop now →</a>
+                    </div>
+                </a>
+            </div>
+            <div class="grid grid-rows-2 gap-6">
+
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="relative h-[350px] sm:h-[400px] md:h-[350px] overflow-hidden">
+                        <a href="" class="group relative block h-full overflow-hidden">
+                            <img class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+                                src="Image/Collections/2.jpg" alt="">
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+                            <div
+                                class="absolute left-4 bottom-4 sm:left-6 sm:bottom-6 md:left-8 md:bottom-8 lg:left-10 lg:bottom-10 2xl:left-12 2xl:bottom-12 flex flex-col gap-2 text-left">
+                                <p class="uppercase tracking-widest text-xs text-orange-300">
+                                    Warm metals that glow
+                                </p>
+
+                                <h1 class="font-['Cormorant'] text-4xl text-white font-medium">
+                                    Golden hour
+                                </h1>
+
+                                <span class="uppercase text-xs underline text-white">
+                                    Shop now →
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="relative h-[350px] sm:h-[400px] md:h-[350px] overflow-hidden">
+                        <a href="" class="group relative block h-full overflow-hidden">
+                            <img class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+                                src="Image/Collections/3.jpg" alt="">
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+                            <div
+                                class="absolute left-2 bottom-2 sm:left-6 sm:bottom-6 md:left-8 md:bottom-8 lg:left-10 lg:bottom-10 2xl:left-12 2xl:bottom-12 flex flex-col gap-2 text-left">
+                                <p class="uppercase tracking-widest text-xs text-orange-300">
+                                    quiet pieces, worn daily
+                                </p>
+
+                                <h1 class="font-['Cormorant'] text-4xl text-white font-medium">
+                                    Everyday Luxe
+                                </h1>
+
+                                <span class="uppercase text-xs underline text-white">
+                                    Shop now →
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative h-[250px] md:h-[225px] overflow-hidden bg-red-100 ">
+                    <div class="flex flex-col gap-2 pl-6 md:w-1/2 absolute top-1/2 -translate-y-1/2 text-left">
+                        <p class="uppercase tracking-widest text-xs text-orange-800">
+                            Limited time
+                        </p>
+
+                        <h1 class="font-['Cormorant'] italic text-4xl font-medium mb-4">
+                            Up to 30% off the Golden Hour edit
+                        </h1>
+                        <button
+                            class="uppercase text-xs mr-8 p-4 bg-zinc-800 text-white hover:bg-white hover:text-zinc-800">Shop
+                            the sale</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Pros-->
+    <section class="bg-[#F0E7DA] py-6 grid md:grid-cols-2 lg:flex lg:justify-around px-8 md:px-28 2xl:px-56">
+        <div class="p-4 px-12 flex gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-truck h-7 w-7 text-gold" aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:124:79">
+                <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                <path d="M15 18H9"></path>
+                <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+                <circle cx="17" cy="18" r="2"></circle>
+                <circle cx="7" cy="18" r="2"></circle>
+            </svg>
+            <div class="flex flex-col gap-1">
+                <p class="text-sm font-bold">Free Shipping</p>
+                <p class="text-sm font-light">On orders over ₹750</p>
+            </div>
+        </div>
+
+        <div class="p-4 px-12 flex gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-shield-check h-7 w-7 text-gold" aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:124:79">
+                <path
+                    d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z">
+                </path>
+                <path d="m9 12 2 2 4-4"></path>
+            </svg>
+            <div class="flex flex-col gap-1">
+                <p class="text-sm font-bold">Secure Payment</p>
+                <p class="text-sm font-light">100% protected checkout</p>
+            </div>
+        </div>
+
+        <div class="p-4 px-12 flex gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-rotate-ccw h-7 w-7 text-gold" aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:124:79">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+            </svg>
+            <div class="flex flex-col gap-1">
+                <p class="text-sm font-bold">Easy Returns</p>
+                <p class="text-sm font-light">30 days, no questions</p>
+            </div>
+        </div>
+
+        <div class="p-4 px-12 flex gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-gift h-7 w-7 text-gold" aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:124:79">
+                <path d="M12 7v14"></path>
+                <path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"></path>
+                <path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"></path>
+                <rect x="3" y="7" width="18" height="4" rx="1"></rect>
+            </svg>
+            <div class="flex flex-col gap-1">
+                <p class="text-sm font-bold">Gift Wrapping</p>
+                <p class="text-sm font-light">Complimentary, always</p>
+            </div>
+        </div>
+    </section>
+
+    <!--Reviews-->
+    <section class="px-8 py-4 my-12 lg:pt-12 md:px-28 2xl:px-56 text-center flex flex-col items-center">
+        <p class="uppercase text-xs text-orange-800 tracking-widest">Kind words</p>
+        <h1 class="font-['Cormorant'] text-5xl font-medium mb-6 p-6">What Our Customers Say</h1>
+
+        <div class="grid lg:grid-cols-3 text-left gap-6">
+            <div class="flex flex-col gap-4 bg-white p-8 ring-1 ring-black/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-quote h-6 w-6 text-orange-800" aria-hidden="true"
+                    data-tsd-source="/src/routes/index.tsx:134:15">
+                    <path
+                        d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                    </path>
+                    <path
+                        d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                    </path>
+                </svg>
+                <p class="font-['Cormorant'] italic text-xl font-light">
+                    The pearl earrings are even prettier in person. Packaging felt like opening a gift to myself.
+                </p>
+                <p class="uppercase tracking-wide text-xs">— Priya S.</p>
+            </div>
+
+            <div class="flex flex-col gap-4 bg-white p-8 ring-1 ring-black/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-quote h-6 w-6 text-orange-800" aria-hidden="true"
+                    data-tsd-source="/src/routes/index.tsx:134:15">
+                    <path
+                        d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                    </path>
+                    <path
+                        d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                    </path>
+                </svg>
+                <p class="font-['Cormorant'] italic text-xl font-light">
+                    My Camille tote goes everywhere with me. Quality is incredible for the price.
+                </p>
+                <p class="uppercase tracking-wide text-xs">— Emma L.</p>
+            </div>
+
+            <div class="flex flex-col gap-4 bg-white p-8 ring-1 ring-black/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-quote h-6 w-6 text-orange-800" aria-hidden="true"
+                    data-tsd-source="/src/routes/index.tsx:134:15">
+                    <path
+                        d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                    </path>
+                    <path
+                        d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                    </path>
+                </svg>
+                <p class="font-['Cormorant'] italic text-xl font-light">
+                    Fast delivery and the gold hoops haven't tarnished at all after months of daily wear.
+                </p>
+                <p class="uppercase tracking-wide text-xs">— Aisha K.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Letter-->
+    <section class="px-8 py-4 my-12 lg:pt-12 md:px-28 2xl:px-56 text-center flex flex-col items-center">
+        <p class="uppercase text-xs text-orange-800 tracking-widest">The Aurelle Letter</p>
+        <h1 class="font-['Cormorant'] text-5xl font-medium p-6">First looks, private offers.</h1>
+        <div class="flex gap-10 md:gap-28 lg:gap-56 py-2 border-b-1">
+            <input class="tracking-tight focus:outline-0" type="text" placeholder="Your email address">
+            <a class="uppercase text-sm tracking-widest cursor-pointer hover:text-orange-800">Subscribe</a>
+        </div>
+    </section>
+
+    <!--Footer-->
+    <footer class="p-8 md:py-10 md:px-20 lg:px-44 text-white/70 bg-zinc-800">
+
+        <div>
+            <div class="border-b border-white/50 flex flex-col gap-8 py-8 md:grid md:grid-cols-[1fr_2fr_1fr]">
+
+                <div class="p-2">
+                    <h1 class="text-xl font-['Cormorant'] font-bold whitespace-nowrap text-white mb-2">AMIRA
+                    </h1>
+                    <p class="text-sm font-thin md:text-xs">Accessories for the woman who adorns herself on purpose..</p>
+                </div>
+
+                <div class="flex gap-12 p-2 md:justify-around">
+                    <div class="text-sm flex flex-col gap-2">
+                        <h1
+                            class="font-['Cormorant'] text-xs font-bold whitespace-nowrap uppercase tracking-wide text-white/50">
+                            Shop</h1>
+                        <a href="" class="hover:text-white">Jewelry</a>
+                        <a href="" class="hover:text-white">Handbags</a>
+                        <a href="" class="hover:text-white">Watches</a>
+                        <a href="" class="hover:text-white">Sunglasses</a>
+                    </div>
+
+                    <div class="text-sm flex flex-col gap-2">
+                        <h1
+                            class="[font-family:'Fraunces'] text-xs font-bold whitespace-nowrap uppercase tracking-wide text-white/50">
+                            Help</h1>
+                        <a href="" class="hover:text-white">Contact & queries</a>
+                        <a href="" class="hover:text-white">Shipping & returns</a>
+                        <a href="" class="hover:text-white">Jewelry care</a>                    </div>
+                    </div>
+
+                <div class="text-sm flex flex-col gap-2 p-2">
+                    <h1
+                        class="[font-family:'Fraunces'] text-xs font-bold whitespace-nowrap uppercase tracking-wide text-white/50">
+                        Visit</h1>
+                    <p>hello@amira.com</p>
+                    <p>(718) 555-0142</p>
+                    <p>412 Greenhouse Way, Brooklyn NY</p>
+                </div>
+            </div>
+
+            <div class="mt-4 flex justify-between items-center">
+                <p>&copy; Anisha</p>
+                <p>2026, AMIRA</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

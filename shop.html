@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amira</title>
+
+    <!--Font Cormorant+Garamond-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+
+    <!--Material icon-->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="font-['karla'] bg-[#FBF6EF] text-gray-700">
+    
+    <!--Navbar-->
+    <nav class="sticky top-0 z-40">
+        <div id="navHead" class=" bg-zinc-800 text-white py-2">
+            <p class="uppercase text-center text-xs text-center tracking-wider px-16 sm:mx-28">Free shipping on
+                orders above ₹1,999 · Easy 7-day returns</p>
+            <p id="navHeadClose" class="uppercase text-md absolute top-1 right-8 lg:right-28 cursor-pointer">&times;
+            </p>
+        </div>
+        <div class="bg-white/90 flex items-center justify-between px-8 py-2 md:px-28 2xl:px-56 shadow-2xl">
+
+            <a class="font-['Cormorant'] font-bold italic tracking-widest text-xl lg:text-2xl uppercase">Amira</a>
+
+            <div class="font-light gap-8 flex items-center">
+                <div class="hidden md:flex md:gap-8 items-center">
+                    <a href="index.html" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Home</a>
+                    <a href="shop.html" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Shop</a>
+                    <a href="" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Contact</a>
+                </div>
+                <a href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search h-5 w-5" aria-hidden="true">
+                        <path d="m21 21-4.34-4.34"></path>
+                        <circle cx="11" cy="11" r="8"></circle>
+                    </svg>
+                </a>
+                <button class="relative btnCart cursor-pointer">
+                    <p
+                        class="cartCount absolute -right-2 -top-2 bg-orange-800 text-white text-xs p-[2px] px-2 rounded-3xl">
+                        0</p>
+                    <svg class="cart" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-shopping-bag h-5 w-5" aria-hidden="true"
+                        data-tsd-source="/src/components/CartDrawer.tsx:31:11">
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        <path d="M3.103 6.034h17.794"></path>
+                        <path
+                            d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z">
+                        </path>
+                    </svg>
+                </button>
+                <div id="hamMenu" class="flex items-center md:hidden">
+                    <span class="material-symbols-outlined text-red-950">menu</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!--sidenav-->
+        <div id="sideNav"
+            class="transition-all duration-1000 bg-zinc-800 items-center text-lg text-gray-300 fixed w-1/2 h-dvh top-0"
+            style="right: -70%;">
+            <p id="sideNavClose" class="uppercase text-md absolute top-10 right-8 cursor-pointer">X</p>
+            <div class="flex flex-col gap-8 m-8 p-8 py-16 top-40">
+                <a href="" class="cursor-pointer">Home</a>
+                <a href="" class="cursor-pointer">Shop</a>
+                <a href="" class="cursor-pointer">Contact</a>
+            </div>
+        </div>
+
+        <!--Cart-->
+        <div>
+            <!-- Cart overlay -->
+            <div
+                class="cartOverlay fixed inset-0 bg-black/40 z-40 opacity-0 pointer-events-none transition-opacity duration-300">
+            </div>
+
+            <!-- Cart drawer -->
+            <div
+                class="cartDrawer fixed top-0 right-0 h-screen w-full sm:w-[420px] bg-white z-50 translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+                <!-- Header -->
+                <div class="flex items-center justify-between p-5 border-b">
+                    <h2 class="text-xl font-semibold">
+                        Your Cart (<span class="cartCount">0</span>)
+                    </h2>
+
+                    <button class="closeCart text-3xl font-light" aria-label="Close cart">
+                        &times;
+                    </button>
+                </div>
+
+                <!-- Products -->
+                <div class="cartItems flex-1 overflow-y-auto p-5 flex flex-col gap-4">
+                </div>
+
+                <!-- Footer -->
+                <div class="border-t p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <p class="text-lg font-medium">Total</p>
+                        <p class="text-lg font-semibold">
+                            ₹<span class="cartTotal">0</span>
+                        </p>
+                    </div>
+
+                    <button class="w-full bg-zinc-900 text-white py-3 hover:bg-zinc-700 transition">
+                        Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </nav>
+
+
+    <!--Header-->
+    <header class="bg-[#F0E7DA] px-8 lg:pt-12 md:px-28 2xl:px-56 text-center flex flex-col items-center"> 
+         <p class="pt-8 md:pt-4 uppercase text-xs text-orange-800 tracking-widest">The Collections</p>
+        <h1 class="font-['Cormorant'] text-5xl font-medium p-6">All Accessories</h1>
+        <div class="p-3 flex gap-4 items-center mb-8 ring-1 ring-black/20">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                class="lucide lucide-search h-4 w-4 text-muted-foreground" aria-hidden="true" 
+                data-tsd-source="/src/routes/shop.tsx:110:13">
+                <path d="m21 21-4.34-4.34"></path>
+                <circle cx="11" cy="11" r="8"></circle>
+            </svg>
+            <input type="text" placeholder="Search earrings, bags, sunglasses..." class="focus:outline-0 w-60 md:w-120">
+        </div>
+    </header>
+
+    
+    <!--Product-->
+    <section class="px-8 py-6 md:py-20 lg:py-20 md:px-20 mb-12">
+        <div class="grid md:grid-cols-[1fr_3fr]">
+            <button class="filter flex gap-3 items-center mb-8 cursor-pointer md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal h-4 w-4" aria-hidden="true" data-tsd-source="/src/routes/shop.tsx:67:128"><path d="M10 5H3"></path><path d="M12 19H3"></path><path d="M14 3v4"></path><path d="M16 17v4"></path><path d="M21 12h-9"></path><path d="M21 19h-5"></path><path d="M21 5h-7"></path><path d="M8 10v4"></path><path d="M8 12H3"></path></svg>
+                <p class="uppercase tracking-widest text-sm md:hidden">Filters</p>
+            </button>
+
+            <!--Filter elements-->
+            <div id="options" class="md:flex md:flex-col gap-2 text-left hidden mb-8">
+
+                <!--Category-filter-->
+                <p class="uppercase tracking-widest text-sm mb-2">category</p>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="handbags" class="category-filter"> Handbags
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="jewelry" class="category-filter"> Jewelry
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="watches" class="category-filter"> Watches
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="sunglasses" class="category-filter"> Sunglasses
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="scarves" class="category-filter"> Scarves
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="hair" class="category-filter"> Hair Accessories
+                </label>
+
+                <br>
+                <br>
+
+                <!--Brand-filter-->
+                <p class="uppercase tracking-widest text-sm mb-2">Brand</p>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="maison" class="brand-filter"> Maison Lune
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="aurélie" class="brand-filter"> Aurélie
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="velora" class="brand-filter"> Velora
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="stella" class="brand-filter"> Stella & Co
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="nuvé" class="brand-filter"> Nuvé
+                </label>
+
+                <label class="flex gap-2 font-light">
+                    <input type="checkbox" value="ondine" class="brand-filter"> Ondine
+                </label>
+            </div>
+
+            <!--Products-->
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                 
+                 <!--image 1-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="5" data-category="handbags" data-brand="maison">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/01-camille-structured-tote.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Camille Structured Tote</h1>
+                        <p>₹899</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Maison Lune</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 2-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="6" data-category="scarves" data-brand="aurélie">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/02.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Silk Scarve</h1>
+                        <p>₹1299</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Aurélie</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 3-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="7" data-category="jewelry" data-brand="velora">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/03.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Pearl Jewel</h1>
+                        <p>₹1999</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Velora</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 4-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="8" data-category="jewelry" data-brand="stella">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/04-chunky-gold-hoops.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Chunky Gold Hoops</h1>
+                        <p>₹599</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Stella & Co</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 5-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="9" data-category="jewelry" data-brand="nuvé">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/05-layered-chain-necklace.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Silk Scarve</h1>
+                        <p>₹2099</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Nuvé</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 6-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="10" data-category="watches" data-brand="ondine">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/06-rose-square-watch.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Rosé circle Watch</h1>
+                        <p>₹2499</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Ondine</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                <!--image 7-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="11" data-category="watches" data-brand="maison">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/07-classic-leather-watch.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Classic Leather Watch</h1>
+                        <p>₹2899</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Maison Lune</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 8-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="12" data-category="handbags" data-brand="aurélie">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/08.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Short bag</h1>
+                        <p>₹1299</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Aurélie</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 9-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="13" data-category="scarves" data-brand="velora">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/10-silk-twill-scarf.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Silk Twill Scarf</h1>
+                        <p>₹2399</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Velora</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 10-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="14" data-category="sunglasses" data-brand="stella">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/09-oversized-riviera-shades.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg"> Riviera Shades</h1>
+                        <p>₹1599</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Stella & Co</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 11-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="15" data-category="hair" data-brand="stella">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/11-pearl-hair-clip-set.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Pearl Hair Clip Set</h1>
+                        <p>₹299</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Stella & co</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 12-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="16" data-category="jewelry" data-brand="ondine">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/12-gold-bangle-stack.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Gold Bangle Stack</h1>
+                        <p>₹2499</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Ondine</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                <!--image 13-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="17" data-category="sunglasses" data-brand="nuvé">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/13.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Cat-eye Shades</h1>
+                        <p>₹2899</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Nuvé</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                 <!--image 14-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="18" data-category="jewelry" data-brand="ondine">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/14.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Pearl Drop Earrings</h1>
+                        <p>₹499</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Ondine</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+                <!--image 15-->
+                <div class="flex flex-col gap-2 product-card" data-product-id="19" data-category="handbags" data-brand="maison">
+                    <div class="productImage overflow-hidden relative flex ring-1 ring-black/20">
+                        <img class=" hover:transform hover:scale-105 hover:duration-500 "
+                            src="Image/Shop/15.jpg" alt="">
+                        <button style="bottom: -20%;"
+                            class="btn-addToCart absolute left-1/2 -translate-x-1/2 w-6/7 py-1 px-4 bg-white ring-1 ring-zinc-800/40 font-light text-sm hover:text-white hover:bg-zinc-800 transition-all duration-300 max-lg:!bottom-[5%]">Add
+                            to cart</button>
+                    </div>
+                    
+                    <div class="flex justify-between px-2 items-center text-sm">
+                        <h1 class="font-['Cormorant'] font-bold md:text-lg">Mini Crossbody in Blush</h1>
+                        <p>₹2899</p>
+                    </div>
+                    <p class="uppercase text-xs tracking-widest px-2 text-orange-800 font-light">Maison Lune</p>
+                    <div class="text-xs font-light px-2 hidden md:flex">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga.
+                    </div>
+                </div>
+
+
+                <!--No items-->
+                <p id="no-products" class="hidden col-span-full text-center py-16 font-['Cormorant'] text-2xl">
+                    No little treasures found ✨
+                    <span class="block text-sm font-light mt-2">
+                        Try another filter to discover your perfect match.
+                    </span>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+
+    <!--Footer-->
+    <footer class="p-8 md:py-10 md:px-20 lg:px-44 text-white/70 bg-zinc-800">
+
+        <div>
+            <div class="border-b border-white/50 flex flex-col gap-8 py-8 md:grid md:grid-cols-[1fr_2fr_1fr]">
+
+                <div class="p-2">
+                    <h1 class="text-xl font-['Cormorant'] font-bold whitespace-nowrap text-white mb-2">AMIRA
+                    </h1>
+                    <p class="text-sm font-thin md:text-xs">Accessories for the woman who adorns herself on purpose..</p>
+                </div>
+
+                <div class="flex gap-12 p-2 md:justify-around">
+                    <div class="text-sm flex flex-col gap-2">
+                        <h1
+                            class="font-['Cormorant'] text-xs font-bold whitespace-nowrap uppercase tracking-wide text-white/50">
+                            Shop</h1>
+                        <a href="" class="hover:text-white">Jewelry</a>
+                        <a href="" class="hover:text-white">Handbags</a>
+                        <a href="" class="hover:text-white">Watches</a>
+                        <a href="" class="hover:text-white">Sunglasses</a>
+                    </div>
+
+                    <div class="text-sm flex flex-col gap-2">
+                        <h1
+                            class="[font-family:'Fraunces'] text-xs font-bold whitespace-nowrap uppercase tracking-wide text-white/50">
+                            Help</h1>
+                        <a href="" class="hover:text-white">Contact & queries</a>
+                        <a href="" class="hover:text-white">Shipping & returns</a>
+                        <a href="" class="hover:text-white">Jewelry care</a>                    </div>
+                    </div>
+
+                <div class="text-sm flex flex-col gap-2 p-2">
+                    <h1
+                        class="[font-family:'Fraunces'] text-xs font-bold whitespace-nowrap uppercase tracking-wide text-white/50">
+                        Visit</h1>
+                    <p>hello@amira.com</p>
+                    <p>(718) 555-0142</p>
+                    <p>412 Greenhouse Way, Brooklyn NY</p>
+                </div>
+            </div>
+
+            <div class="mt-4 flex justify-between items-center">
+                <p>&copy; Anisha</p>
+                <p>2026, AMIRA</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- <script src="index.js"></script> -->
+    <script src="shop.js"></script>
+
+</body>
+</html>

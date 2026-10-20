@@ -1,0 +1,79 @@
+.hero-zoom1,
+.hero-zoom2,
+.hero-zoom3 {
+    transform: scale(1);
+}
+
+#slide-1.active .hero-zoom1,
+#slide-2.active .hero-zoom2,
+#slide-3.active .hero-zoom3 {
+    animation: heroZoom 7s ease-out forwards;
+}
+
+@keyframes heroZoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.25);
+    }
+}
+.rise1, .rise2, .rise3{
+    opacity: 0;
+    animation: textRise 7s ease-out infinite;
+}
+@keyframes textRise {
+    from{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#slide-1, #slide-2, #slide-3 {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s;
+    pointer-events: none;
+}
+
+#slide-1.active, #slide-2.active, #slide-3.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+.slideBar1, .slideBar2, .slideBar3 {
+    display: block;
+    flex-shrink: 0;
+    width: 20px;
+    height: 2px;
+    padding: 0;
+    border: none;
+    background-color: rgb(255 255 255 / 80%);
+    transition: width 0.4s ease, background-color 0.4s ease;
+    cursor: pointer;
+}
+
+.slideBar1.active, .slideBar2.active, .slideBar3.active {
+    width: 60px;
+    background-color: rgb(205, 130, 68);
+}
+
+.marquee{
+    animation: marque 20s linear infinite;
+}
+@keyframes marque {
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-40%);
+    }
+}
+
