@@ -381,6 +381,7 @@ displayCart();
 let categoryFilters = document.querySelectorAll(".category-filter");
 let brandFilters = document.querySelectorAll(".brand-filter");
 let products = document.querySelectorAll(".product-card");
+let search = document.getElementById("search");
 
 // Function to filter products
 function filterProducts() {
@@ -435,6 +436,29 @@ function filterProducts() {
     document.getElementById("no-products").classList.toggle("hidden", visibleCount > 0);
 }
 
+//Function ro search
+function searchProducts() {
+    let searchValue = search.value.toLowerCase().trim();
+    let visibleCount = 0;
+
+    products.forEach(function(product) {
+        let productName = product.textContent.toLowerCase();
+
+        let searchMatch = productName.indexOf(searchValue) !== -1;
+
+        if (searchMatch) {
+            product.style.display = "";
+            visibleCount++;
+        } else {
+            product.style.display = "none";
+        }
+    });
+
+    document.getElementById("no-products").classList.toggle("hidden", visibleCount > 0);
+}
+
+search.addEventListener("input", searchProducts);
+
 // Add event listeners to category checkboxes
 categoryFilters.forEach(function (checkbox) {
     checkbox.addEventListener("change", filterProducts);
@@ -443,4 +467,29 @@ categoryFilters.forEach(function (checkbox) {
 // Add event listeners to brand checkboxes
 brandFilters.forEach(function (checkbox) {
     checkbox.addEventListener("change", filterProducts);
+});
+
+
+//Clear filter button
+
+let clearBtn = document.getElementById("btn-clear");
+
+clearBtn.addEventListener("click", function() {
+
+    // Uncheck all category checkboxes
+    categoryFilters.forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+
+    // Uncheck all brand checkboxes
+    brandFilters.forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+
+    // Clear the search input (if needed)
+    search.value = "";
+
+    // Show all products again
+    filterProducts();
+
 });

@@ -31,15 +31,15 @@
         </div>
         <div class="bg-white/90 flex items-center justify-between px-8 py-2 md:px-28 2xl:px-56 shadow-2xl">
 
-            <a class="font-['Cormorant'] font-bold italic tracking-widest text-xl lg:text-2xl uppercase">Amira</a>
+            <a href="index.html" class="font-['Cormorant'] font-bold italic tracking-widest text-xl lg:text-2xl uppercase">Amira</a>
 
             <div class="font-light gap-8 flex items-center">
                 <div class="hidden md:flex md:gap-8 items-center">
                     <a href="index.html" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Home</a>
                     <a href="shop.html" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Shop</a>
-                    <a href="" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Contact</a>
+                    <a href="contact.html" class="cursor-pointer hover:underline hover:text-black hover:font-medium">Contact</a>
                 </div>
-                <a href="">
+                <a href="shop.html">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-search h-5 w-5" aria-hidden="true">
@@ -75,9 +75,9 @@
             style="right: -70%;">
             <p id="sideNavClose" class="uppercase text-md absolute top-10 right-8 cursor-pointer">X</p>
             <div class="flex flex-col gap-8 m-8 p-8 py-16 top-40">
-                <a href="" class="cursor-pointer">Home</a>
-                <a href="" class="cursor-pointer">Shop</a>
-                <a href="" class="cursor-pointer">Contact</a>
+                <a href="index.html" class="cursor-pointer">Home</a>
+                <a href="shop.html" class="cursor-pointer">Shop</a>
+                <a href="contact.html" class="cursor-pointer">Contact</a>
             </div>
         </div>
 
@@ -130,14 +130,14 @@
     <header class="bg-[#F0E7DA] px-8 lg:pt-12 md:px-28 2xl:px-56 text-center flex flex-col items-center"> 
          <p class="pt-8 md:pt-4 uppercase text-xs text-orange-800 tracking-widest">The Collections</p>
         <h1 class="font-['Cormorant'] text-5xl font-medium p-6">All Accessories</h1>
-        <div class="p-3 flex gap-4 items-center mb-8 ring-1 ring-black/20">
+        <div class="p-3 flex gap-4 items-center mb-12 ring-1 ring-black/20">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
                 class="lucide lucide-search h-4 w-4 text-muted-foreground" aria-hidden="true" 
                 data-tsd-source="/src/routes/shop.tsx:110:13">
                 <path d="m21 21-4.34-4.34"></path>
                 <circle cx="11" cy="11" r="8"></circle>
             </svg>
-            <input type="text" placeholder="Search earrings, bags, sunglasses..." class="focus:outline-0 w-60 md:w-120">
+            <input id="search" type="text" placeholder="Search earrings, bags, sunglasses..." class="focus:outline-0 w-60 md:w-120">
         </div>
     </header>
 
@@ -209,6 +209,13 @@
                 <label class="flex gap-2 font-light">
                     <input type="checkbox" value="ondine" class="brand-filter"> Ondine
                 </label>
+
+                <br>
+                <br>
+
+                <button id="btn-clear" class="text-center text-white mr-20 px-4 py-3 bg-zinc-800 hover:text-zinc-800 hover:bg-white hover:border-1">
+                    Clear Filter
+                </button>
             </div>
 
             <!--Products-->
@@ -544,19 +551,19 @@
                         <h1
                             class="font-['Cormorant'] text-xs font-bold whitespace-nowrap uppercase tracking-wide text-white/50">
                             Shop</h1>
-                        <a href="" class="hover:text-white">Jewelry</a>
-                        <a href="" class="hover:text-white">Handbags</a>
-                        <a href="" class="hover:text-white">Watches</a>
-                        <a href="" class="hover:text-white">Sunglasses</a>
+                        <a href="shop.html" class="hover:text-white">Jewelry</a>
+                        <a href="shop.html" class="hover:text-white">Handbags</a>
+                        <a href="shop.html" class="hover:text-white">Watches</a>
+                        <a href="shop.html" class="hover:text-white">Sunglasses</a>
                     </div>
 
                     <div class="text-sm flex flex-col gap-2">
                         <h1
                             class="[font-family:'Fraunces'] text-xs font-bold whitespace-nowrap uppercase tracking-wide text-white/50">
                             Help</h1>
-                        <a href="" class="hover:text-white">Contact & queries</a>
-                        <a href="" class="hover:text-white">Shipping & returns</a>
-                        <a href="" class="hover:text-white">Jewelry care</a>                    </div>
+                        <a href="contact.html" class="hover:text-white">Contact & queries</a>
+                        <a href="contact.html" class="hover:text-white">Shipping & returns</a>
+                        <a href="contact.html" class="hover:text-white">Jewelry care</a>                    </div>
                     </div>
 
                 <div class="text-sm flex flex-col gap-2 p-2">
