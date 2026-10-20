@@ -375,6 +375,12 @@ function displayCart() {
     // Update all cart count displays
     cartCounts.forEach(function (element) {
         element.textContent = totalQuantity;
+
+        if (totalQuantity === 0) {
+            element.classList.add("hidden");
+        } else {
+            element.classList.remove("hidden");
+        }
     });
 
     // Update total price
